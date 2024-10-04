@@ -6,7 +6,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float speed = 10f;
+    public float walk_speed = 10f;
+    public float jump_speed = 5f;
     public bool grounded;
 
     private Rigidbody2D body;
@@ -21,10 +22,10 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
-        body.velocity = new Vector2(horizontal*speed, body.velocity.y);
+        body.velocity = new Vector2(horizontal*walk_speed, body.velocity.y);
         if (Input.GetKey(KeyCode.Space) && grounded == true)
         {
-            body.velocity = new Vector2(body.velocity.x, speed);
+            Jump();
         }
         // Character flip
         if (horizontal>0.01f)
@@ -37,17 +38,18 @@ public class PlayerMovement : MonoBehaviour
         }
         // Anim
         anim.SetBool("move", horizontal != 0);
+        anim.SetBool("ground", grounded);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
         {
-            grounded == true;
+            grounded = true;
         }
     }
     private void Jump()
     {
-        body.velocity = new Vector2(horizontal * speed, body.velocity.y);
+        body.velocity = new Vector2(body.velocity.x, jump_speed);
         grounded = false;
     }
 }
