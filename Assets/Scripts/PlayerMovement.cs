@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask wallLayer;
     private float wallJumpCooldown;
     private CapsuleCollider2D capsuleCollider;
+    private float horizontal;
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
@@ -28,11 +29,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
-        body.velocity = new Vector2(horizontal*walk_speed, body.velocity.y);
-        if (Input.GetKey(KeyCode.Space) && IsGrounded())
-        {
-            Jump();
-        }
+        
         // Character flip
         if (horizontal>0.01f)
         {
@@ -45,18 +42,44 @@ public class PlayerMovement : MonoBehaviour
         // Anim
         anim.SetBool("move", horizontal != 0);
         anim.SetBool("ground", IsGrounded());
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //if (collision.gameObject.tag == "Ground")
-        //{
-        //    grounded = true;
-        //}
+
+        // Jump
+        if (wallJumpCooldown < 0.2f)
+        {
+            if (Input.GetKey(KeyCode.Space) && IsGrounded())
+            {
+                Jump();
+            }
+            body.velocity = new Vector2(horizontal * walk_speed, body.velocity.y);
+
+            if (OnWall() && !IsGrounded())
+            {
+                body.gravityScale = 0;
+                body.velocity = Vector2.zero;
+            }
+            else
+            {
+                body.gravityScale = 1;
+            }
+        }
+        else
+        {
+            wallJumpCooldown += Time.deltaTime;
+        }
     }
     private void Jump()
     {
-        body.velocity = new Vector2(body.velocity.x, jump_speed);
-        anim.SetTrigger("jump");
+        if (IsGrounded())
+        {
+            body.velocity = new Vector2(body.velocity.x, jump_speed);
+            anim.SetTrigger("jump");
+        } else if (OnWall() && !IsGrounded())
+        {
+            wallJumpCooldown = 0;
+            body.velocity = new Vector2(-MathF.Sign(transform.localScale.x) * 3, 6);
+        }
+        
+        
     }
     private bool IsGrounded()
     {
@@ -67,5 +90,9 @@ public class PlayerMovement : MonoBehaviour
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(capsuleCollider.bounds.center, capsuleCollider.bounds.size, 0, new Vector2(transform.localScale.x,0), 0.1f, wallLayer);
         return raycastHit.collider != null;
+    }
+    public bool CanAttack()
+    {
+        return horizontal == 0 && IsGrounded() && !OnWall();
     }
 }
