@@ -7,8 +7,8 @@ public class PlayerAttack : MonoBehaviour
 {
     // Start is called before the first frame update
     public float attackCooldown;
-    private Transform firePoint;
-    private GameObject[] fireBalls;
+    public Transform firePoint;
+    public GameObject[] fireBalls;
     private Animator anim;
     private PlayerMovement playermov;
     private float cooldownTimer = Mathf.Infinity;
@@ -21,16 +21,19 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0) && cooldownTimer>attackCooldown && PlayerMovement.CanAttack())
+        if (Input.GetMouseButton(0) && cooldownTimer > attackCooldown && playermov.CanAttack())
         {
             Attack();
-            cooldownTimer += Time.deltaTime;
         }
+        cooldownTimer += Time.deltaTime;
     }
     private void Attack()
     {
         anim.SetTrigger("attack");
         cooldownTimer = 0;
+
+        fireBalls[FindFireBall()].transform.position = firePoint.position;
+        fireBalls[FindFireBall()].GetComponent<Fireball>().SetDirection(Mathf.Sign(transform.localScale.x));
     }
     private int FindFireBall()
     {
