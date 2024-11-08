@@ -6,17 +6,17 @@ using UnityEngine.UI;
 public class Healthbar : MonoBehaviour
 {
     public Heart playerHealth;
-    public Image hp_totalbr;
-    public Image hp_currentbr;
+    public Image hp_total;
+    public Image hp_current;
     // Start is called before the first frame update
     void Start()
     {
-        hp_totalbr.fillAmount = playerHealth.currentHealth / 10;
+        hp_total.fillAmount = playerHealth.currentHealth / 10;
     }
 
     // Update is called once per frame
     void Update()
     {
-        hp_currentbr.fillAmount = playerHealth.currentHealth / 10;
+        hp_current.fillAmount = playerHealth.currentHealth / 10;
     }
 }
