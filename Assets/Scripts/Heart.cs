@@ -6,8 +6,8 @@ public class Heart : MonoBehaviour
 {
     private Animator anim;
     private bool dead;
-    private float startingHealth;
-    public float currentHealth;
+    public float startingHealth;
+    public float currentHealth { get; private set; }
     // Start is called before the first frame update
     void Start()
     {
@@ -34,8 +34,9 @@ public class Heart : MonoBehaviour
         {
             if(!dead)
             {
-                anim.SetTrigger("dead");
+                anim.SetTrigger("die");
                 GetComponent<PlayerMovement>().enabled = false;
+                GetComponent<PlayerAttack>().enabled = false;
                 dead = true;
             }
         }

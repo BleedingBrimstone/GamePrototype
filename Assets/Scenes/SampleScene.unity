@@ -210,7 +210,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &30963668
 Transform:
   m_ObjectHideFlags: 0
@@ -331,7 +331,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &30963673
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -404,7 +404,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &54523966
 Transform:
   m_ObjectHideFlags: 0
@@ -525,7 +525,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &54523971
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -598,7 +598,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &332843942
 Transform:
   m_ObjectHideFlags: 0
@@ -719,7 +719,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &332843947
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -797,7 +797,7 @@ Transform:
   m_GameObject: {fileID: 437019503}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.88, y: -0.44, z: 0}
+  m_LocalPosition: {x: 1.521, y: -0.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -950,7 +950,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &537417629
 Transform:
   m_ObjectHideFlags: 0
@@ -1071,7 +1071,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &537417634
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1241,8 +1241,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 938686796}
-  hp_totalbr: {fileID: 0}
-  hp_currentbr: {fileID: 0}
+  hp_total: {fileID: 1636299891}
+  hp_current: {fileID: 2103470655}
 --- !u!1 &622338009
 GameObject:
   m_ObjectHideFlags: 0
@@ -3977,7 +3977,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &814276556
 Transform:
   m_ObjectHideFlags: 0
@@ -4098,7 +4098,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &814276561
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4171,7 +4171,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &899480915
 Transform:
   m_ObjectHideFlags: 0
@@ -4292,7 +4292,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &899480920
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4402,7 +4402,6 @@ GameObject:
   - component: {fileID: 938686794}
   - component: {fileID: 938686795}
   - component: {fileID: 938686796}
-  - component: {fileID: 938686797}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -4456,7 +4455,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 5.12, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -4619,20 +4618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9dc27083764e294e857e10dcfe34f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 1
---- !u!114 &938686797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 938686787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33304784ee4ad3e429013f9c45d7ef1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
+  startingHealth: 10
 --- !u!1 &1089466074
 GameObject:
   m_ObjectHideFlags: 0
@@ -4772,7 +4758,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1630033808
 Transform:
   m_ObjectHideFlags: 0
@@ -4893,7 +4879,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &1630033813
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4996,7 +4982,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
+  m_Color: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5041,7 +5027,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1647100646
 Transform:
   m_ObjectHideFlags: 0
@@ -5162,7 +5148,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &1647100651
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5235,7 +5221,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1904268991
 Transform:
   m_ObjectHideFlags: 0
@@ -5356,7 +5342,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &1904268996
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5559,7 +5545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1967065367
 Transform:
   m_ObjectHideFlags: 0
@@ -5680,7 +5666,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &1967065372
 SpriteRenderer:
   m_ObjectHideFlags: 0

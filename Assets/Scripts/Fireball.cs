@@ -16,7 +16,7 @@ public class Fireball : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
-        boxCollider = gameObject.GetComponent<BoxCollider2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
     }
     private void Update()
     {
@@ -40,10 +40,10 @@ public class Fireball : MonoBehaviour
     }
     public void SetDirection(float _direction)
     {
+        lifeTime = 0;
         direction = _direction;
         gameObject.SetActive(true);
         hit = false;
-        boxCollider.enabled = true;
         float localscaleX = transform.localScale.x;
         if (Mathf.Sign(localscaleX) != _direction)
         {

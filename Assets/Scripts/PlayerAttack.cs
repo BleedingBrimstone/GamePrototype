@@ -38,10 +38,12 @@ public class PlayerAttack : MonoBehaviour
     private int FindFireBall()
     {
         for (int i = 0; i < fireBalls.Length; i++)
+        {
             if (!fireBalls[i].activeInHierarchy)
             {
                 return i;
             }
+        }
         return 0;
     }
 }
