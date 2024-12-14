@@ -37,6 +37,10 @@ public class Fireball : MonoBehaviour
         hit = true;
         boxCollider.enabled = false;
         anim.SetTrigger("explode");
+        if (collision.CompareTag("ground"))
+        {
+            Destroy(gameObject);
+        }
     }
     public void SetDirection(float _direction)
     {
@@ -54,5 +58,13 @@ public class Fireball : MonoBehaviour
     private void Deactivate()
     {
         gameObject.SetActive(false);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Wall")
+        {
+            Deactivate();
+        }
     }
 }

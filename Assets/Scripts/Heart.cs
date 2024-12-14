@@ -37,6 +37,7 @@ public class Heart : MonoBehaviour
                 anim.SetTrigger("die");
                 GetComponent<PlayerMovement>().enabled = false;
                 GetComponent<PlayerAttack>().enabled = false;
+                GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
                 dead = true;
             }
         }

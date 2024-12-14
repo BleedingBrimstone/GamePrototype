@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private float wallJumpCooldown;
     private CapsuleCollider2D capsuleCollider;
     private float horizontal;
+
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
