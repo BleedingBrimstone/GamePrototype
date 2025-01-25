@@ -21,7 +21,7 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0) && cooldownTimer > attackCooldown && playermov.CanAttack())
+        if (Input.GetMouseButtonDown(0) && cooldownTimer > attackCooldown && playermov.CanAttack())
         {
             Attack();
         }
@@ -44,6 +44,6 @@ public class PlayerAttack : MonoBehaviour
                 return i;
             }
         }
-        return 0;
+        return -1;
     }
 }

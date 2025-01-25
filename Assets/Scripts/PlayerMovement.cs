@@ -19,11 +19,17 @@ public class PlayerMovement : MonoBehaviour
     private CapsuleCollider2D capsuleCollider;
     private float horizontal;
 
+    private Vector3 respawnPoint;
+    public GameObject fallDetector;
+    private BoxCollider2D boxCollider;
+
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
+        respawnPoint = transform.position;
     }
 
     // Update is called once per frame
@@ -67,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
         {
             wallJumpCooldown += Time.deltaTime;
         }
+        fallDetector.transform.position = new Vector2(transform.position.x, transform.position.y);
     }
     private void Jump()
     {
@@ -95,5 +102,15 @@ public class PlayerMovement : MonoBehaviour
     public bool CanAttack()
     {
         return horizontal == 0 && IsGrounded() && !OnWall();
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "DeadZone")
+        {
+            transform.position = respawnPoint;
+        } else if (collision.tag == "Checkpoint")
+        {
+            respawnPoint = transform.position;
+        }
     }
 }

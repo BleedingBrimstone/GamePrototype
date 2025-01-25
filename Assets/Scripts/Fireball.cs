@@ -24,7 +24,7 @@ public class Fireball : MonoBehaviour
         {
             return;
         }    
-        float movementspeed = speed * Time.deltaTime *direction;
+        float movementspeed = speed * Time.deltaTime * direction;
         transform.Translate(movementspeed, 0, 0);
         lifeTime += Time.deltaTime;
         if (lifeTime > 5)
@@ -37,9 +37,15 @@ public class Fireball : MonoBehaviour
         hit = true;
         boxCollider.enabled = false;
         anim.SetTrigger("explode");
-        if (collision.CompareTag("ground"))
+        if (collision.CompareTag("Ground") || collision.CompareTag("Wall"))
         {
-            Destroy(gameObject);
+            Debug.Log("wall or ground");
+            Deactivate();
+        }
+        else if (collision.CompareTag("Enemy"))
+        {
+            Debug.Log("Enemy");
+            Deactivate();
         }
     }
     public void SetDirection(float _direction)

@@ -7,6 +7,11 @@ TagManager:
   - Ground
   - Wall
   - Saw
+  - DeadZone
+  - Checkpoint
+  - Coin
+  - Platform
+  - Enemy
   layers:
   - Default
   - TransparentFX
