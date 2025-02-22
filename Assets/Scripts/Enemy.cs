@@ -1,20 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int health;
-    public void takeDamage(int _damage)
+    public float hp;
+    public float damage;
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        health -= _damage;
-        if (health <= 0)
+        if (collision.tag == "Bullet")
         {
-            Destroy();
+            hp -= 1;
+            if (hp <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
-    }
-    private void Destroy()
-    {
-        Destroy(gameObject);
+
+        if (collision.tag == "Player")
+        {
+            collision.GetComponent<Heart>().takeDamage(damage);
+        }
     }
 }

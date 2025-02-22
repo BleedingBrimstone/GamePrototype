@@ -12,6 +12,7 @@ TagManager:
   - Coin
   - Platform
   - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX

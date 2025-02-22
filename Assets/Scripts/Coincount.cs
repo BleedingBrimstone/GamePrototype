@@ -7,10 +7,10 @@ using UnityEngine.UI;
 public class Coincount : MonoBehaviour
 {
     public static int coin = 0;
-    Text text;
+    TMP_Text text;
     void Start()
     {
-        text = GetComponent<Text>();
+        text = GetComponent<TMP_Text>();
     }
 
     private void Update()

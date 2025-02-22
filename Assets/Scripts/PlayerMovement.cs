@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask wallLayer;
     private float wallJumpCooldown;
     private CapsuleCollider2D capsuleCollider;
-    private float horizontal;
+    public float horizontal;
 
     private Vector3 respawnPoint;
     public GameObject fallDetector;
