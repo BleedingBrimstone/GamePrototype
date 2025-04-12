@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    private Animator anim;
     public float speed;
     public Rigidbody2D rb;
     public SpriteRenderer m_SpriteRenderer;
@@ -13,6 +14,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
     }
@@ -25,8 +27,10 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        anim.SetTrigger("Explosion");
         Debug.Log("Ñoll" + collision.name);
-        if (collision.CompareTag("Ground") || collision.CompareTag("Wall") || collision.CompareTag("Coin"))
+        StartCoroutine(PauseAndDoSomething());
+        if (collision.CompareTag("Ground") || collision.CompareTag("Wall") || collision.CompareTag("Coin") || collision.CompareTag("Enemy"))
         {
             Destroy(gameObject);
         }
@@ -48,5 +52,9 @@ public class Bullet : MonoBehaviour
         {
             Debug.LogError("No");
         }
+    }
+    private IEnumerator PauseAndDoSomething()
+    {
+        yield return new WaitForSeconds(1f);
     }
 }
