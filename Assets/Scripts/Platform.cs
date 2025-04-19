@@ -7,7 +7,6 @@ public class Platform : MonoBehaviour
     public Transform pos1;
     public Transform pos2;
     public float speed;
-
     private Transform target;
 
 
@@ -16,8 +15,13 @@ public class Platform : MonoBehaviour
         target = pos2;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         transform.position = Vector3.MoveTowards(transform.position, target.position, speed*Time.deltaTime);
+
+        if (Vector3.Distance(transform.position, target.position) < 0.1f)
+        {
+            target = (target == pos2) ? pos1 : pos2;
+        }
     }
 }

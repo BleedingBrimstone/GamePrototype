@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+
     // Start is called before the first frame update
     public float walk_speed = 10f;
     public float jump_speed = 5f;
@@ -87,7 +88,6 @@ public class PlayerMovement : MonoBehaviour
             body.velocity = new Vector2(-MathF.Sign(transform.localScale.x) * 3, 6);
         }
         
-        
     }
     private bool IsGrounded()
     {
@@ -111,6 +111,21 @@ public class PlayerMovement : MonoBehaviour
         } else if (collision.tag == "Checkpoint")
         {
             respawnPoint = transform.position;
+        }
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            transform.SetParent(collision.transform);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            transform.SetParent(null);
         }
     }
 }

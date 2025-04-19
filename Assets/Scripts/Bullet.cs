@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+
+    // Sound
+    [SerializeField] private AudioClip explosion1;
+
     private Animator anim;
     public float speed;
     public Rigidbody2D rb;
@@ -27,12 +31,14 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        anim.SetTrigger("Explosion");
         Debug.Log("Ñoll" + collision.name);
-        StartCoroutine(PauseAndDoSomething());
-        if (collision.CompareTag("Ground") || collision.CompareTag("Wall") || collision.CompareTag("Coin") || collision.CompareTag("Enemy"))
+        anim.SetTrigger("Explosion");
+        if (collision.CompareTag("Ground") || collision.CompareTag("Wall") || collision.CompareTag("Enemy") || collision.CompareTag("Saw"))
         {
-            Destroy(gameObject);
+            AudioManager.instance.PlaySound(explosion1);
+            rb.bodyType = RigidbodyType2D.Static;
+            rb.gravityScale = 0;
+            Destroy(gameObject, 10f);
         }
     }
 
@@ -52,9 +58,5 @@ public class Bullet : MonoBehaviour
         {
             Debug.LogError("No");
         }
-    }
-    private IEnumerator PauseAndDoSomething()
-    {
-        yield return new WaitForSeconds(1f);
     }
 }

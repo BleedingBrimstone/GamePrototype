@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Heart : MonoBehaviour
 {
+    
+    // Sounds
+    [SerializeField] private AudioClip damage1;
+
     private Animator anim;
     private bool dead;
     public float startingHealth;
@@ -25,6 +29,7 @@ public class Heart : MonoBehaviour
     }
     public void takeDamage(float _damage)
     {
+        AudioManager.instance.PlaySound(damage1);
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
         if (currentHealth > 0)
         {
