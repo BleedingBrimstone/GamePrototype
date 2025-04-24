@@ -12,11 +12,18 @@ public class Heart : MonoBehaviour
     private bool dead;
     public float startingHealth;
     public float currentHealth { get; private set; }
+
+    [SerializeField] private float flashDuration = 0.2f; // Длительность покраснения
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor;
+
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = startingHealth;
         anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
     }
 
     // Update is called once per frame
@@ -27,13 +34,25 @@ public class Heart : MonoBehaviour
             takeDamage(1);
         }
     }
+    private IEnumerator FlashRedCoroutine()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(flashDuration);
+        spriteRenderer.color = originalColor;
+    }
+
+    public void FlashRed()
+    {
+        StartCoroutine(FlashRedCoroutine());
+    }
+
     public void takeDamage(float _damage)
     {
         AudioManager.instance.PlaySound(damage1);
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
         if (currentHealth > 0)
         {
-            anim.SetTrigger("flicker");
+            FlashRed();
         }
         else
         {

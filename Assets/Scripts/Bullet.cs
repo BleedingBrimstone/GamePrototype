@@ -32,12 +32,12 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Ñoll" + collision.name);
-        anim.SetTrigger("Explosion");
-        if (collision.CompareTag("Ground") || collision.CompareTag("Wall") || collision.CompareTag("Enemy") || collision.CompareTag("Saw"))
+        if (collision.CompareTag("Ground") || collision.CompareTag("Wall") || collision.CompareTag("Enemy") || collision.CompareTag("Saw") || collision.CompareTag("Coin"))
         {
             AudioManager.instance.PlaySound(explosion1);
             rb.bodyType = RigidbodyType2D.Static;
             rb.gravityScale = 0;
+            anim.SetTrigger("Explosion");
             Destroy(gameObject, 10f);
         }
     }
