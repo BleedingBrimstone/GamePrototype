@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Heart : MonoBehaviour
 {
-    
+
     // Sounds
     [SerializeField] private AudioClip damage1;
 
@@ -56,18 +57,31 @@ public class Heart : MonoBehaviour
         }
         else
         {
-            if(!dead)
+            if (!dead)
             {
                 anim.SetTrigger("die");
                 GetComponent<PlayerMovement>().enabled = false;
                 GetComponent<PlayerAttack>().enabled = false;
                 GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
                 dead = true;
+                // "“ÛÚ"
+                StartCoroutine(LoadAfterDelay("Menu", 2f));
             }
         }
     }
     public void addHealth(float _value)
     {
         currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
+    private IEnumerator LoadAfterDelay(string sceneName, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(sceneName);
     }
 }
