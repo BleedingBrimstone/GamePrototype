@@ -74,11 +74,6 @@ public class Heart : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
     }
 
-    public void LoadScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
-    }
-
     private IEnumerator LoadAfterDelay(string sceneName, float delay)
     {
         yield return new WaitForSeconds(delay);

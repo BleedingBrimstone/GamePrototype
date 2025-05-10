@@ -1,25 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class Enemy : MonoBehaviour
+public class Boss : MonoBehaviour
 {
-    public float hp;
-    public float damage;
-
-    public float movementDistance;
-    public float speed;
-    private float leftEdge;
-    private float rightEdge;
-    private bool movingLeft;
-
-    [SerializeField] private float flashDuration = 0.2f; // Длительность покраснения
-    private SpriteRenderer spriteRenderer;
-    private Color originalColor;
+    // Healthbar
+    public Boss playerHealth;
+    public Image hp_total;
+    public Image hp_current;
 
     void Start()
     {
+        hp_total.fillAmount = playerHealth.startingHealth / 10;
+        currentHealth = startingHealth;
+        anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
         leftEdge = transform.position.x - movementDistance;
         rightEdge = transform.position.x + movementDistance;
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -28,6 +26,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        hp_current.fillAmount = playerHealth.currentHealth / 10;
         if (movingLeft)
         {
             if (transform.position.x > leftEdge)
@@ -53,6 +52,26 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+
+// Sounds
+[SerializeField] private AudioClip damage1;
+
+    private Animator anim;
+    private bool dead;
+    public float startingHealth;
+    public float currentHealth { get; private set; }
+
+    [SerializeField] private float flashDuration = 0.2f; // Длительность покраснения
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor;
+
+    public float damage;
+    public float movementDistance;
+    public float speed;
+    private float leftEdge;
+    private float rightEdge;
+    private bool movingLeft;
+
     private IEnumerator FlashRedCoroutine()
     {
         spriteRenderer.color = Color.red;
@@ -65,14 +84,35 @@ public class Enemy : MonoBehaviour
         StartCoroutine(FlashRedCoroutine());
     }
 
+    public void takeDamage(float _damage)
+    {
+        AudioManager.instance.PlaySound(damage1);
+        currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
+        if (currentHealth > 0)
+        {
+            FlashRed();
+        }
+        else
+        {
+            if (!dead)
+            {
+                Destroy(gameObject, 2f);
+            }
+        }
+    }
+    public void addHealth(float _value)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
         if (collision.tag == "Bullet")
         {
             FlashRed();
-            hp -= 1;
-            if (hp <= 0)
+            currentHealth -= 1;
+            if (currentHealth <= 0)
             {
                 Destroy(gameObject, 0.2f);
             }
